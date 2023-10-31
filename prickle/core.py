@@ -1280,9 +1280,9 @@ def protocol(message_bytes, message_type, time, version):
             message.name = temp[4].decode('ascii').rstrip(' ')
             message.event = temp[5].decode('ascii')
         elif message.type == 'A':  # add
-            temp = struct.unpack('>HHHIQsI8sI', message_bytes)
+            temp = struct.unpack('!HHIHQsI8sI', message_bytes)
             message.sec = time
-            message.nano = temp[2] | (temp[3] << 16)
+            message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
             message.buysell = temp[5].decode('ascii')
             message.shares = temp[6]
