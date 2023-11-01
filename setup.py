@@ -6,14 +6,14 @@ with open('README.md') as f:
 with open('LICENSE') as f:
     license = f.read()
 
-setup(name='prickle',
-      author='Colin Swaney',
-      author_email='colinswaney@gmail.com',
-      url='https://github.com/colinswaney/prickle',
+setup(name='trading_etl',
+      author='Aryan Iden Khojandi',
+      author_email='akhojandi@gmail.com',
+      url='https://github.com/aryan-iden-khojandi/trading_etl',
       version='0.1',
       description='A package for high-frequency trade research.',
       long_description=readme,
       license=license,
       install_requires=['numpy', 'h5py', 'pandas', 'matplotlib'],
-      packages=['prickle']
+      packages=['trading_etl']
 )
