@@ -1274,7 +1274,7 @@ def protocol(message_bytes, message_type, time, version):
             message.nano = (temp[2] << 16) + temp[3]
             message.event = temp[4].decode('ascii')
         elif message.type == 'H':
-            temp = struct.unpack('>HHHI8sss4s', message_bytes)
+            temp = struct.unpack('>HHIH8sss4s', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.name = temp[4].decode('ascii').rstrip(' ')
@@ -1289,7 +1289,7 @@ def protocol(message_bytes, message_type, time, version):
             message.name = temp[7].decode('ascii').rstrip(' ')
             message.price = temp[8]
         elif message.type == 'F':  # add w/mpid
-            temp = struct.unpack('>HHHIQsI8sI4s', message_bytes)
+            temp = struct.unpack('>HHIHQsI8sI4s', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
@@ -1298,31 +1298,31 @@ def protocol(message_bytes, message_type, time, version):
             message.name = temp[7].decode('ascii').rstrip(' ')
             message.price = temp[8]
         elif message.type == 'E':  # execute
-            temp = struct.unpack('>HHHIQIQ', message_bytes)
+            temp = struct.unpack('>HHIHQIQ', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
             message.shares = temp[5]
         elif message.type == 'C':  # execute w/price
-            temp = struct.unpack('>HHHIQIQsI', message_bytes)
+            temp = struct.unpack('>HHIHQIQsI', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
             message.shares = temp[5]
             message.price = temp[8]
         elif message.type == 'X':  # cancel
-            temp = struct.unpack('>HHHIQI', message_bytes)
+            temp = struct.unpack('>HHIHQI', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
             message.shares = temp[5]
         elif message.type == 'D':  # delete
-            temp = struct.unpack('>HHHIQ', message_bytes)
+            temp = struct.unpack('>HHIHQ', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
         elif message.type == 'U':  # replace
-            temp = struct.unpack('>HHHIQQII', message_bytes)
+            temp = struct.unpack('>HHIHQQII', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.refno = temp[4]
@@ -1330,7 +1330,7 @@ def protocol(message_bytes, message_type, time, version):
             message.shares = temp[6]
             message.price = temp[7]
         elif message.type == 'Q':  # cross-trade
-            temp = struct.unpack('>HHHIQ8sIQ1s', message_bytes)
+            temp = struct.unpack('>HHIHQ8sIQ1s', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.shares = temp[4]
