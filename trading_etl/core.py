@@ -1269,7 +1269,7 @@ def protocol(message_bytes, message_type, time, version):
         if message.type == 'T':  # time
             raise ValueError('Time messages not supported in ITCHv5.0.')
         elif message_type == 'S':  # systems
-            temp = struct.unpack('>HHHIs', message_bytes)
+            temp = struct.unpack('>HHIHs', message_bytes)
             message.sec = time
             message.nano = (temp[2] << 16) + temp[3]
             message.event = temp[4].decode('ascii')
