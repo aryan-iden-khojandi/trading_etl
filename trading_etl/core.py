@@ -1329,6 +1329,15 @@ def protocol(message_bytes, message_type, time, version):
             message.newrefno = temp[5]
             message.shares = temp[6]
             message.price = temp[7]
+        elif message.type == 'P':  # non-cross trade
+            temp = struct.unpack('>HHIHQsIQIQ', message_bytes)
+            message.sec = time
+            message.nano = (temp[2] << 16) + temp[3]
+            message.refno = temp[4]
+            # message.buysell = temp[5].decode('ascii')  # Comment out because it will always be 'B'?
+            message.shares = temp[6]
+            message.name = temp[7].decode('ascii').rstrip(' ')
+            message.price = temp[8]
         elif message.type == 'Q':  # cross-trade
             temp = struct.unpack('>HHIHQ8sIQ1s', message_bytes)
             message.sec = time
